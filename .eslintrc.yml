@@ -1,0 +1,33 @@
+env:
+  es2021: true
+  node: true
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+parser: '@typescript-eslint/parser'
+parserOptions:
+  project: './tsconfig.json'
+  ecmaVersion: latest
+  sourceType: module
+plugins:
+  - '@typescript-eslint'
+rules:
+  indent:
+    - error
+    - spaces
+  linebreak-style:
+    - error
+    - windows
+  quotes:
+    - error
+    - single
+  semi: off
+  '@typescript-eslint/no-non-null-assertion': off,
+  '@typescript-eslint/no-misused-promises': off,
+  '@typescript-eslint/promise-function-async': off,
+  '@typescript-eslint/naming-convention': off,
+  '@typescript-eslint/strict-boolean-expressions': off,
+  '@typescript-eslint/return-await': off,
+  'prettier/prettier': error,
+  'arrow-body-style': off,
+  'prefer-arrow-callback': off
