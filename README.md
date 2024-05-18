@@ -126,7 +126,3 @@ Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em c
 
 - Email: <vmsvitor20@gmail.com>
 - GitHub: [seu-usuario](https://github.com/VitorMeloDS)
-
-```
-
-```
