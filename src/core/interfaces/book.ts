@@ -4,5 +4,4 @@ export interface Book {
   autor: string;
   resumo: string;
   isbn: number;
-  id?: string
 }
