@@ -7,37 +7,37 @@ export class BookService {
   private static readonly connection = FireBase.database();
 
   // * Busca todos os livros.
-  public static async getAll() {
+  public static async getAll(): Promise<Book[]> {
     const _books = await this.connection.collection('livro').get();
 
-    const books: any[] = []
-    _books.forEach((doc) => books.push({ id: doc.id, ...doc.data() }));
+    const books: Book[] = [];
+    _books.forEach((doc) => books.push(Object.assign({ id: doc.id, ...doc.data() })));
 
     return books;
   }
 
   // * Busca um livro.
-  public static async getById(id: string) {
+  public static async getById(id: string): Promise<Book> {
     const _book = await this.connection.collection('livro').doc(id).get();
     if (!_book.exists) throw new HttpNotFound('Livro não encontrado');
-    const book = Object.assign({ ..._book.data(), id: _book.id });
+    const book: Book = Object.assign({ ..._book.data(), id: _book.id });
 
     return book;
   }
 
   // * Cria um novo livro.
-  public static async save(_book: Book) {
+  public static async save(_book: Book): Promise<Book> {
     const createdBook = await this.connection.collection('livro').add({ ..._book });
 
     const result = await createdBook.get();
 
-    const book = Object.assign({ ...result.data() }, { id: result.id });
+    const book: Book = Object.assign({ ...result.data(), id: result.id });
 
     return book;
   }
 
   // * Atualiza um livro.
-  public static async update(id: string, post: Partial<Book>) {
+  public static async update(id: string, post: Partial<Book>): Promise<Book> {
     const _existBook = await this.connection.collection('livro').doc(id).get();
     if (!_existBook.exists) throw new HttpNotFound('Livro não encontrado');
 
@@ -45,7 +45,7 @@ export class BookService {
     await updatedBook.update(post);
 
     const _book = await this.connection.collection('livro').doc(id).get();
-    const book = Object.assign({ ..._book.data(), id: _book.id });
+    const book: Book = Object.assign({ ..._book.data(), id: _book.id });
 
     return book;
   }

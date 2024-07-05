@@ -5,6 +5,6 @@ import { Router } from 'express';
 const router: Router = Router();
 
 // * Rota para os livros.
-router.use('/livro', routerBook);
+router.use('/book', routerBook);
 
 export const routerControl: Router = router;
