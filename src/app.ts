@@ -26,12 +26,12 @@ export class AppListen {
   }
 
   // * Inicializador da API.
-  public static listen(): void {
+  public static listen(): import('http').Server {
     this.configResponse();
     this.configCors();
     this.router();
 
-    this.app.listen(this.port, (): void => {
+    return this.app.listen(this.port, (): void => {
       console.log('Server started on port ' + this.port);
     });
   }

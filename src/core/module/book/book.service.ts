@@ -1,4 +1,4 @@
-import { HttpNotFound } from 'src/common/helps/http.exception';
+import { HttpNotFound } from '../../../common/helps/http.exception';
 import { FireBase } from '../../../common/providers/firebase';
 import { Book } from '../../interfaces/book';
 

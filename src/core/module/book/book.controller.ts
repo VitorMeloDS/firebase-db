@@ -1,10 +1,10 @@
 import { isBookPost } from '../../../common/validations/book.schema';
-import { HttpBadRequest } from 'src/common/helps/http.exception';
-import { HttpHandle } from 'src/common/helps/http.handle';
+import { HttpBadRequest } from '../../../common/helps/http.exception';
+import { HttpHandle } from '../../../common/helps/http.handle';
 import { NextFunction, Request, Response } from 'express';
-import { HttpStatus } from 'src/common/helps/http.status';
+import { HttpStatus } from '../../../common/helps/http.status';
 import { BookService } from './book.service';
-import { Book } from 'src/core/interfaces/book';
+import { Book } from '../../interfaces/book';
 
 export class BookController {
   /**
@@ -29,7 +29,7 @@ export class BookController {
   @HttpHandle(HttpStatus.OK)
   public static async getById(req: Request, _res: Response, _next: NextFunction): Promise<Book> {
     const { id } = req.params;
-    if (!id) throw new HttpBadRequest();
+    if (!id) throw new HttpBadRequest('O id do curso é obrigatório!');
 
     return await BookService.getById(id);
   }

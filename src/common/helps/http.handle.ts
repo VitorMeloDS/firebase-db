@@ -10,11 +10,7 @@ export function HttpHandle(statusCode: HttpStatus): MethodDecorator {
    * @param { PropertyDescriptor } descriptor - Objeto do método (descritor);
    * @return { TypedPropertyDescriptor<T> } - Objeto do método manipulado;
    */
-  return function <T>(
-    target: any,
-    methodName: string | symbol,
-    descriptor: PropertyDescriptor
-  ): TypedPropertyDescriptor<T> {
+  return function <T>(target: any, methodName: string | symbol, descriptor: PropertyDescriptor): TypedPropertyDescriptor<T> {
     /**
      * Manipulador do requisição original da class controller;
      */
@@ -26,10 +22,10 @@ export function HttpHandle(statusCode: HttpStatus): MethodDecorator {
         const result = await originalProperty.call(this, req, res, next);
         const data = result ?? 'NO_CONTENT';
         const hour = time;
-        res.send({ data, hour }).status(statusCode);
+        res.status(statusCode).send({ data, hour });
         next();
       } catch (error: any) {
-        console.error(`${target.name}.${methodName.toString()}`, error);
+        console.log(`${target.name}.${methodName.toString()}`, error);
         const data = error.message;
         const hour = time;
         res.status(error?.status ?? 500).send({ data, hour });
